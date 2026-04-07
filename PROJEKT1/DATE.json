@@ -1,0 +1,68 @@
+[
+  {
+    "NUMBER": 1,
+    "DATE": "12.03.2026",
+    "SENSOR TYPE": "WATER TEMPERATURE",
+    "VALUE": 15
+  },
+  {
+    "NUMBER": 2,
+    "DATE": "13.03.2026",
+    "SENSOR TYPE": "GAS FLOW",
+    "VALUE": 13
+  },
+  {
+    "NUMBER": 3,
+    "DATE": "14.03.2026",
+    "SENSOR TYPE": "ELECTRICITY CONSUMPTION",
+    "VALUE": 234
+  },
+  {
+    "NUMBER": 4,
+    "DATE": "15.03.2026",
+    "SENSOR TYPE": "WATER TEMPERATURE",
+    "VALUE": 45
+  },
+  {
+    "NUMBER": 5,
+    "DATE": "16.03.2026",
+    "SENSOR TYPE": "GAS FLOW",
+    "VALUE": -123
+  },
+  {
+    "NUMBER": 6,
+    "DATE": "17.03.2026",
+    "SENSOR TYPE": "ELECTRICITY CONSUMPTION",
+    "VALUE": 12
+  },
+  {
+    "NUMBER": 7,
+    "DATE": "18.03.2026",
+    "SENSOR TYPE": "WATER TEMPERATURE",
+    "VALUE": 98
+  },
+  {
+    "NUMBER": 8,
+    "DATE": "19.03.2026",
+    "SENSOR TYPE": "GAS FLOW",
+    "VALUE": -345
+  },
+  {
+    "NUMBER": 9,
+    "DATE": "20.03.2026",
+    "SENSOR TYPE": "ELECTRICITY CONSUMPTION",
+    "VALUE": 244
+  },
+  {
+    "NUMBER": 10,
+    "DATE": "21.03.2026",
+    "SENSOR TYPE": "WATER TEMPERATURE",
+    "VALUE": 12
+  },
+  {
+    "NUMBER": 11,
+    "DATE": "22.03.2026",
+    "SENSOR TYPE": "GAS FLOW",
+    "VALUE": 457
+  }
+]
