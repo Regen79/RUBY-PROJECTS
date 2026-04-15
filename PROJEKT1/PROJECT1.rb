@@ -30,7 +30,7 @@ class DataReader
 end
 
 Reader1 = DataReader.new
-Reader1.reader_csv_or_json("DATE.csv")
+Reader1.reader_csv_or_json("DATA.csv")
 Reader1.validate
-Reader1.reader_csv_or_json("DATE.json")
+Reader1.reader_csv_or_json("DATA.json")
 Reader1.validate
