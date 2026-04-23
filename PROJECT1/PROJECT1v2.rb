@@ -1,3 +1,6 @@
+#File podane w konstruktorze
+#Usunięte data z konstruktora
+
 require 'csv'
 require 'json'
 require 'yaml'
@@ -5,13 +8,13 @@ require 'yaml'
 # ==================================CSV==============================
 class CsvReader 
   attr_accessor :data
-  def initialize
-    @data=[]
+  def initialize(file)
+    @file=file
   end
-  def read(file)
-    @data = CSV.read(file, col_sep: ';', encoding: 'UTF-8', headers: true)
+  def read
+    data = CSV.read(@file, col_sep: ';', encoding: 'UTF-8', headers: true)
     puts "==============================CSV=============================="
-    @data.each do |row|
+    data.each do |row|
       value = row["VALUE"].to_i
       if value >= 0
         puts "Day #{row['DATE']}: sensor #{row['SENSOR TYPE']} show value #{row['VALUE']}"
@@ -25,13 +28,13 @@ end
 # ==================================JSON========================
 class JsonReader 
   attr_accessor :data
-  def initialize
-    @data=[]
+  def initialize(file)
+    @file=file
   end
-  def read(file)
-    @data = JSON.parse(File.read(file))
+  def read
+    data = JSON.parse(File.read(@file))
     puts "==============================JSON============================="
-    @data.each do |row|
+    data.each do |row|
       value = row["VALUE"].to_i
       if value >= 0
         puts "Day #{row['DATE']}: sensor #{row['SENSOR TYPE']} show value #{row['VALUE']}"
@@ -45,13 +48,13 @@ end
 # ===================================YAML====================
 class YamlReader 
   attr_accessor :data
-  def initialize
-    @data=[]
+  def initialize(file)
+    @file=file
   end
-  def read(file)
-    @data = YAML.load_file(file)
+  def read
+    data = YAML.load_file(@file)
     puts "==============================YAML============================="
-    @data.each do |row|
+    data.each do |row|
       value = row["VALUE"].to_i
       if value >= 0
         puts "Day #{row['DATE']}: sensor #{row['SENSOR TYPE']} show value #{row['VALUE']}"
@@ -66,11 +69,11 @@ end
 class DataReaderFactory
   def create_reader(file,option={}) 
     if file.end_with?('.csv')
-      return CsvReader.new
+      return CsvReader.new(file)
     elsif file.end_with?('.json')
-      return JsonReader.new
+      return JsonReader.new(file)
     elsif file.end_with?('.yaml')
-      return YamlReader.new
+      return YamlReader.new(file)
     else
       raise "Incorrect file"
     end  
@@ -88,5 +91,7 @@ end
 # =================================INSTANCE=====================
 factory = DataReaderFactory.new
 reader=factory.create_reader(file)
-reader.read(file)
+reader.read
+
+
 
