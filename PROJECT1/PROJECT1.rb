@@ -11,6 +11,18 @@ $db.execute("
     sensor_type TEXT,
     value REAL
   )")
+
+#=================================MEASURMENT==========================
+class Measurements
+  attr_accessor :number, :date, :sensor_type, :value
+  def initialize( number:, date:, sensor_type:, value:)
+    @number=number
+    @date=date
+    @sensor_type=sensor_type
+    @value=value
+  end
+end
+
 # ==================================CSV==============================
 class CsvReader 
   attr_accessor :data
@@ -21,14 +33,20 @@ class CsvReader
     data = CSV.read(@file, col_sep: ';', encoding: 'UTF-8', headers: true)
     puts "==============================CSV=============================="
     data.each do |row|
-      value = row["VALUE"].to_f
-      if value >= 0
-        puts "Number: #{row["NUMBER"]}, Day #{row['DATE']}: sensor #{row['SENSOR TYPE']} show value #{value}"
+      m=Measurements.new(
+        number: row["NUMBER"],
+        date: row['DATE'],
+        sensor_type: row['SENSOR TYPE'],
+        value: row["VALUE"].to_f,
+      )
+      
+      if m.value >= 0
+        puts "Number: #{m.number}, Day #{m.date}: sensor #{m.sensor_type} show value #{m.value}"
         $db.execute("INSERT INTO measurements (date, sensor_type,value ) VALUES (?, ?, ?)", 
-                    [row['DATE'], row['SENSOR TYPE'], row['VALUE']]
+                    [m.date, m.sensor_type, m.value]
                    )
       else
-        puts "Number: #{row["NUMBER"]}, Day #{row['DATE']}: negative value #{value}. Error read"
+        puts "Number: #{m.number}, Day #{m.date}: sensor #{m.sensor_type} show negative value #{m.value}. Error read"
       end
     end
   end
@@ -44,14 +62,20 @@ class JsonReader
     data = JSON.parse(File.read(@file))
     puts "==============================JSON============================="
     data.each do |row|
-      value = row["VALUE"].to_f
-      if value >= 0
-        puts "Number: #{row["NUMBER"]}, Day #{row['DATE']}: sensor #{row['SENSOR TYPE']} show value #{value}"
+      m=Measurements.new(
+        number: row["NUMBER"],
+        date: row['DATE'],
+        sensor_type: row['SENSOR TYPE'],
+        value: row["VALUE"].to_f,
+      )
+      
+      if m.value >= 0
+        puts "Number: #{m.number}, Day #{m.date}: sensor #{m.sensor_type} show value #{m.value} "
         $db.execute("INSERT INTO measurements (date, sensor_type,value ) VALUES (?, ?, ?)", 
-                    [row['DATE'], row['SENSOR TYPE'], row['VALUE']]
+                    [m.date, m.sensor_type, m.value]
                    )
       else
-        puts "Number: #{row["NUMBER"]}, Day #{row['DATE']}: negative value #{value}. Error read"
+        puts "Number: #{m.number}, Day #{m.date}: sensor #{m.sensor_type} show negative value #{m.value}. Error read"
       end
     end
   end
@@ -67,14 +91,20 @@ class YamlReader
     data = YAML.load_file(@file)
     puts "==============================YAML============================="
     data.each do |row|
-      value = row["VALUE"].to_f
-      if value >= 0
-        puts "Number: #{row["NUMBER"]}, Day #{row['DATE']}: sensor #{row['SENSOR TYPE']} show value #{value}"
+      m=Measurements.new(
+        number: row["NUMBER"],
+        date: row['DATE'],
+        sensor_type: row['SENSOR TYPE'],
+        value: row["VALUE"].to_f,
+      )
+      
+      if m.value >= 0
+        puts "Number: #{m.number}, Day #{m.date}: sensor #{m.sensor_type} show value #{m.value}"
         $db.execute("INSERT INTO measurements (date, sensor_type,value ) VALUES (?, ?, ?)", 
-                    [row['DATE'], row['SENSOR TYPE'], row['VALUE']]
+                    [m.date, m.sensor_type, m.value]
                    )
       else
-        puts "Number: #{row["NUMBER"]}, Day #{row['DATE']}: negative value #{value}. Error read"
+        puts "Number: #{m.number}, Day #{m.date}: sensor #{m.sensor_type} show negative value #{m.value}. Error read"
       end
     end
   end
